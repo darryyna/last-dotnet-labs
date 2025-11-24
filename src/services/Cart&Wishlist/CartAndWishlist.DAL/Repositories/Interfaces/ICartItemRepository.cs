@@ -10,4 +10,5 @@ public interface ICartItemRepository
     Task<bool> DeleteCartItemAsync(Guid cartItemId, CancellationToken cancellationToken);
     Task<List<CartItem>> GetCartItemsAsync(Guid cartId, int pageNumber, int pageSize, CancellationToken cancellationToken);
     Task<long> CountAllAsync(Guid cartId, CancellationToken cancellationToken);
+    Task<List<CartItem>> GetCartItemsByBookIdAsync(Guid bookId, CancellationToken cancellationToken);
 }

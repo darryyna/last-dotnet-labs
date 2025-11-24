@@ -8,12 +8,14 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\ServiceDefaults1\ServiceDefaults1.csproj" />
       <ProjectReference Include="..\BookCatalog.Application\BookCatalog.Application.csproj" />
       <ProjectReference Include="..\BookCatalog.Infrastructure\BookCatalog.Infrastructure.csproj" />
     </ItemGroup>
 
     <ItemGroup>
       <PackageReference Include="Swashbuckle.AspNetCore" Version="9.0.6" />
+        <PackageReference Include="Aspire.MongoDB.Driver" Version="9.0.0" />
     </ItemGroup>
 
     <ItemGroup>

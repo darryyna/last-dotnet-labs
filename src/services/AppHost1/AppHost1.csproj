@@ -1,0 +1,23 @@
+<Project Sdk="Aspire.AppHost.Sdk/13.0.0">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <UserSecretsId>b833268c-d8b8-4c95-b413-a3b15549f3b3</UserSecretsId>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Aggregator\Aggregator\Aggregator.csproj" />
+      <ProjectReference Include="..\BookCatalog\BookCatalog.API\BookCatalog.API.csproj" />
+      <ProjectReference Include="..\Cart&amp;Wishlist\CartAndWishlist.API\CartAndWishlist.API.csproj" />
+      <ProjectReference Include="..\Order&amp;Inventory\OrderAndInventory.API\OrderAndInventory.API.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Aspire.Hosting.MongoDB" Version="13.0.0" />
+      <PackageReference Include="Aspire.Hosting.PostgreSQL" Version="13.0.0" />
+    </ItemGroup>
+
+</Project>

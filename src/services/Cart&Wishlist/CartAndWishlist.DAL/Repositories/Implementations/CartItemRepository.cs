@@ -103,4 +103,18 @@ public class CartItemRepository : RepositoryBase, ICartItemRepository
 
         return await Connection.ExecuteScalarAsync<long>(cmd);
     }
+    
+    public async Task<List<CartItem>> GetCartItemsByBookIdAsync(Guid bookId, CancellationToken cancellationToken)
+    {
+        ThrowIfConnectionOrTransactionIsUninitialized();
+
+        var cmd = new CommandDefinition(
+            "SELECT * FROM cart_items WHERE book_id = @BookId",
+            new { BookId = bookId },
+            cancellationToken: cancellationToken,
+            transaction: Transaction
+        );
+
+        return (await Connection.QueryAsync<CartItem>(cmd)).ToList();
+    }
 }

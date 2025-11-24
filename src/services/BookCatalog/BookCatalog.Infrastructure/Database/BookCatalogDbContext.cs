@@ -15,7 +15,7 @@ public class BookCatalogDbContext
     
     public BookCatalogDbContext(IMongoClient mongoClient, IOptions<MongoOptions> options)
     {
-        _mongoDatabase = mongoClient.GetDatabase(options.Value.DatabaseName);
+        _mongoDatabase = mongoClient.GetDatabase("bookCatalogDb");
     }
 
     public IMongoCollection<Book> Books => _mongoDatabase.GetCollection<Book>(BooksCollectionName);

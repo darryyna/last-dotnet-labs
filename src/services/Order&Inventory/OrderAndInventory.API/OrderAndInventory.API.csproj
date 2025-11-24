@@ -8,6 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\ServiceDefaults1\ServiceDefaults1.csproj" />
       <ProjectReference Include="..\OrderAndInventory.BLL\OrderAndInventory.BLL.csproj" />
     </ItemGroup>
 

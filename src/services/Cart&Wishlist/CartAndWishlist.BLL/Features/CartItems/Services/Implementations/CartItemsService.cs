@@ -169,4 +169,26 @@ public class CartItemsService : ICartItemsService
             throw e.ToInfrastructureException();
         }
     }
+    
+    public async Task<Result<List<CartItemDto>>> GetCartItemsByBookIdAsync(Guid bookId, CancellationToken cancellationToken)
+    {
+        try
+        {
+            await _unitOfWork.BeginTransactionAsync();
+
+            var items = await _unitOfWork.CartItemRepository.GetCartItemsByBookIdAsync(bookId, cancellationToken);
+
+            await _unitOfWork.CommitTransactionAsync();
+
+            return Result<List<CartItemDto>>.Ok(
+                items.Select(x => _mapper.Map<CartItemDto>(x)).ToList()
+            );
+        }
+        catch (DbException e)
+        {
+            await _unitOfWork.RollbackTransactionAsync();
+            _logger.LogError(e, "Error occurred during DB operation");
+            throw e.ToInfrastructureException();
+        }
+    }
 }

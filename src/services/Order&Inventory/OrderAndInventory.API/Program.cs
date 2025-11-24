@@ -7,6 +7,7 @@ using Shared.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.AddServiceDefaults();
 builder.Host.ConfigureSerilog();
 
 builder.Services.AddSwaggerGen();
@@ -30,6 +31,7 @@ if (app.Environment.IsDevelopment())
     await app.MigrateDatabaseAsync();
 }
 
+app.MapDefaultEndpoints();
 app.UseExceptionHandler();
 
 app.MapControllers();

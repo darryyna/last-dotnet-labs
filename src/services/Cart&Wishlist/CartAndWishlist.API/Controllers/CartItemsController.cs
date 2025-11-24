@@ -48,4 +48,10 @@ public class CartItemsController : BaseApiController
     {
         return (await _cartItemsService.DeleteCartItemAsync(new DeleteCartItemRequest(cartItemId), cancellationToken)).ToApiResponse();
     }
+    
+    [HttpGet("by-book/{bookId:guid}")]
+    public async Task<IActionResult> GetByBookId(Guid bookId, CancellationToken cancellationToken)
+    {
+        return (await _cartItemsService.GetCartItemsByBookIdAsync(bookId, cancellationToken)).ToApiResponse();
+    }
 }

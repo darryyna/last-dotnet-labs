@@ -3,6 +3,7 @@ using BookCatalog.Domain.ValueObjects;
 using BookCatalog.Infrastructure.Serializers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Serializers;
 using MongoDB.Driver;
@@ -132,6 +133,6 @@ public static class DbSetup
     private static void ConfigureConventions()
     {
         BsonSerializer.RegisterSerializer(new AddressSerializer());
-        BsonSerializer.RegisterSerializer(new GuidSerializer(MongoDB.Bson.GuidRepresentation.Standard));
+        BsonDefaults.GuidRepresentationMode = GuidRepresentationMode.V2;
     }
 }

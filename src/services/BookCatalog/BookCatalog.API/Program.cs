@@ -6,6 +6,8 @@ using Shared.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.AddServiceDefaults();
+builder.AddMongoDBClient("bookCatalogDb");
 builder.Host.ConfigureSerilog();
 
 builder.Services.AddSwaggerGen();
@@ -15,7 +17,6 @@ builder.Services.AddControllers();
 builder.Services
     .ConfigureApplication()
     .ConfigureInfrastructure();
-
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -25,6 +26,7 @@ if (app.Environment.IsDevelopment())
     await app.SetupDatabase();
 }
 
+app.MapDefaultEndpoints();
 app.UseExceptionHandler();
 
 app.MapControllers();

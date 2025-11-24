@@ -10,7 +10,7 @@ public static class DbInitializer
 {
     public static Task MigrateDatabase(this WebApplication app)
     {
-        var dbConnection = app.Configuration.GetConnectionString(IDatabaseConnectionAccessor.DatabaseConnectionConfigurationKey);
+        var dbConnection = app.Configuration.GetConnectionString("cartWishlistDb");
 
         if (string.IsNullOrWhiteSpace(dbConnection))
         {

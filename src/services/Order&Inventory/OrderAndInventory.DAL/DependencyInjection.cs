@@ -18,8 +18,7 @@ public static class DependencyInjection
     {
         services.AddDbContext<OrderAndInventoryDbContext>(opt =>
         {
-            opt.UseNpgsql(configuration.GetConnectionString(
-                              OrderAndInventoryDbContext.ConnectionStringConfigurationKey)
+            opt.UseNpgsql(configuration.GetConnectionString("orderInventoryDb")
                           ?? throw new ItemInConfigurationNotFoundException(OrderAndInventoryDbContext.ConnectionStringConfigurationKey));
 
             opt.UseSnakeCaseNamingConvention(CultureInfo.InvariantCulture);

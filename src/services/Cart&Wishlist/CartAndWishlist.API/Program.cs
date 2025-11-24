@@ -7,6 +7,7 @@ using Shared.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.AddServiceDefaults();
 builder.Host.ConfigureSerilog();
 
 builder.Services
@@ -23,6 +24,7 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+app.MapDefaultEndpoints();
 app.UseExceptionHandler();
 
 if (app.Environment.IsDevelopment())

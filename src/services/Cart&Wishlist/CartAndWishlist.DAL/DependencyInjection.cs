@@ -18,7 +18,7 @@ public static class DependencyInjection
         Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
 
         services.AddScoped<IDatabaseConnectionAccessor, NpgsqlConnectionAccessor>(_ => new NpgsqlConnectionAccessor(
-            configuration.GetConnectionString(IDatabaseConnectionAccessor.DatabaseConnectionConfigurationKey)
+            configuration.GetConnectionString("cartWishlistDb")
             ?? throw new ItemInConfigurationNotFoundException(IDatabaseConnectionAccessor.DatabaseConnectionConfigurationKey)));
 
         services.AddScoped<ICartItemRepository, CartItemRepository>();
