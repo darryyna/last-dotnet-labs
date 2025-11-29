@@ -14,8 +14,13 @@
       <PackageReference Include="AutoMapper" Version="15.0.1" />
       <PackageReference Include="FluentValidation" Version="12.0.0" />
       <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.0.0" />
+      <PackageReference Include="Grpc.AspNetCore" Version="2.76.0-pre1" />
     </ItemGroup>
 
-    
+    <ItemGroup>
+        <Protobuf Include="Protos\member.proto" GrpcServices="Server" />
+    </ItemGroup>
+
+
 
 </Project>

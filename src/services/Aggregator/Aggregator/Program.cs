@@ -36,14 +36,11 @@ app.MapGet("/api/full-book-data/{bookId:guid}", async (
     var book = await catalogClient.GetFromJsonAsync<BookDto>($"api/books/{bookId}");
     var cartItems = await cartWishlistClient
         .GetFromJsonAsync<List<CartItemDto>>($"api/cart-items/by-book/{bookId}");
-    var wishlistItems = await cartWishlistClient
-        .GetFromJsonAsync<PaginationResult<WishlistItemDto>>($"api/wishlist-items?bookId={bookId}");
-
+    
     return Results.Ok(new
     {
         book,
         cartItems,
-        wishlistItems
     });
 });
 

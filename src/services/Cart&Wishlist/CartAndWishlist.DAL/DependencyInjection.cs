@@ -7,6 +7,7 @@ using CartAndWishlist.DAL.Repositories.UOW.Implementations;
 using CartAndWishlist.DAL.Repositories.UOW.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Npgsql;
 using Shared.Exceptions;
 
 namespace CartAndWishlist.DAL;
@@ -32,6 +33,12 @@ public static class DependencyInjection
         services.AddScoped<RepositoryBase, WishlistItemRepository>();
 
         services.AddScoped<IUnitOfWork, UnitOfWork>();
+        
+        services.AddOpenTelemetry()
+            .WithTracing(tracing =>
+            {
+                tracing.AddNpgsql();
+            });
 
         return services;
     }

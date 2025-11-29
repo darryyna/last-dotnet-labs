@@ -1,0 +1,15 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "OrderAndInventory.Grpc";
+
+service MemberGRPCService {
+  rpc DoesMemberExist (DoesMemberExistRequest) returns (DoesMemberExistResponse);
+}
+
+message DoesMemberExistRequest {
+  string id = 1;
+}
+
+message DoesMemberExistResponse {
+  bool exists = 1;
+}

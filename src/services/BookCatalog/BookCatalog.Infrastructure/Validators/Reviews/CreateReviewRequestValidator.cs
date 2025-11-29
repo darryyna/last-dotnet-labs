@@ -3,16 +3,21 @@ using BookCatalog.Domain.Models;
 using BookCatalog.Infrastructure.Database;
 using FluentValidation;
 using MongoDB.Driver;
+using OrderAndInventory.Grpc;
 
 namespace BookCatalog.Infrastructure.Validators.Reviews;
 
 public class CreateReviewRequestValidator : AbstractValidator<CreateReviewCommand>
 {
     private readonly BookCatalogDbContext _dbContext;
+    private readonly MemberGRPCService.MemberGRPCServiceClient _memberClient;
+
     
-    public CreateReviewRequestValidator(BookCatalogDbContext dbContext)
+    public CreateReviewRequestValidator(BookCatalogDbContext dbContext, 
+        MemberGRPCService.MemberGRPCServiceClient memberClient)
     {
         _dbContext = dbContext;
+        _memberClient = memberClient;
         RuleFor(x => x.Request.BookId)
             .MustAsync(BookMustExistAsync)
             .WithMessage("Book with such ID does not exist");
@@ -29,10 +34,10 @@ public class CreateReviewRequestValidator : AbstractValidator<CreateReviewComman
             .MaximumLength(200)
             .WithMessage("Maximum lenght of review test is 200 characters");
     }
-    private Task<bool> UserMustExistAsync(Guid id, CancellationToken cancellationToken)
+    private async Task<bool> UserMustExistAsync(Guid id, CancellationToken cancellationToken)
     {
-        // mock (its gonna be a call to the users api in the future)
-        return Task.FromResult(true);
+        var response = await _memberClient.DoesMemberExistAsync(new DoesMemberExistRequest() { Id = id.ToString() }, cancellationToken: cancellationToken);
+        return response.Exists;
     }
 
     private async Task<bool> BookMustExistAsync(Guid id, CancellationToken cancellationToken)

@@ -2,6 +2,7 @@ using System.Globalization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Npgsql;
 using OrderAndInventory.DAL.Database;
 using OrderAndInventory.DAL.Models;
 using OrderAndInventory.DAL.Repositories.Implementations;
@@ -74,6 +75,13 @@ public static class DependencyInjection
         services.AddScoped<IStaffRepository, StaffRepository>();
 
         services.AddScoped<IUnitOfWork, UnitOfWork>();
+        
+        services.AddOpenTelemetry()
+            .WithTracing(tracing =>
+            {
+                tracing.AddNpgsql();
+            });
+
 
         return services;
     }

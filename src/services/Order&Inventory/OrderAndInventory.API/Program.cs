@@ -1,4 +1,5 @@
 using OrderAndInventory.BLL;
+using OrderAndInventory.BLL.Services.Implenentations;
 using OrderAndInventory.DAL;
 using OrderAndInventory.DAL.Database;
 using Shared.ErrorHandling;
@@ -8,7 +9,7 @@ using Shared.Middlewares;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.AddServiceDefaults();
-builder.Host.ConfigureSerilog();
+//builder.Host.ConfigureSerilog();
 
 builder.Services.AddSwaggerGen();
 
@@ -21,6 +22,9 @@ builder.Services
     .ConfigureBusinessLayer();
 
 var app = builder.Build();
+
+app.UseHttpsRedirection();
+app.MapGrpcService<MemberGrpcService>();
 
 app.UseMiddleware<CorrelationIdMiddleware>();
 

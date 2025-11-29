@@ -1,4 +1,5 @@
 var builder = DistributedApplication.CreateBuilder(args);
+var redis = builder.AddRedis("redis");
 
 var orderInventoryDb = builder.AddPostgres("order-inventory-db")
     .WithDataVolume()
@@ -22,7 +23,9 @@ var orderInventoryApi = builder.AddProject<Projects.OrderAndInventory_API>("orde
 var bookCatalogApi = builder.AddProject<Projects.BookCatalog_API>("book-catalog-api")
     .WithReference(bookCatalogDb)
     .WithHttpEndpoint(port: 5002, name: "book-catalog-http")
-    .WaitFor(bookCatalogDb);
+    .WaitFor(bookCatalogDb)
+    .WithReference(redis)
+    .WaitFor(redis);
 
 
 var cartWishlistApi = builder.AddProject<Projects.CartAndWishlist_API>("cart-wishlist-api")

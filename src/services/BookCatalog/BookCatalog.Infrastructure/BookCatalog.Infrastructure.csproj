@@ -12,7 +12,20 @@
     </ItemGroup>
 
     <ItemGroup>
+        <PackageReference Include="Grpc.Net.Client" Version="2.76.0-pre1" />
+        <PackageReference Include="Grpc.Net.ClientFactory" Version="2.76.0-pre1" />
+        <PackageReference Include="Grpc.Tools" Version="2.76.0">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
         <PackageReference Include="MongoDB.Driver" Version="2.30.0" />
+        <PackageReference Include="MongoDB.Driver.Core.Extensions.DiagnosticSources" Version="1.5.0" />
+        <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="10.0.0" />
+        <PackageReference Include="OpenTelemetry.Instrumentation.GrpcNetClient" Version="1.14.0-beta.1" />
     </ItemGroup>
-    
+
+    <ItemGroup>
+        <Protobuf Include="Protos\member.proto" GrpcServices="Client" />
+    </ItemGroup>
+
 </Project>

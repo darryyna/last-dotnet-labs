@@ -13,7 +13,7 @@ public static class DependencyInjection
         services.AddAutoMapper(_ => {}, Assembly.GetExecutingAssembly());
 
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
-        
+        services.AddGrpc();
         services.AddScoped<IInventoryService, InventoryService>();
         services.AddScoped<IMemberService, MemberService>();
         services.AddScoped<IOrderService, OrderService>();
